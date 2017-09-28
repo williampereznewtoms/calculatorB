@@ -18,6 +18,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
             </http:request-builder>
         </http:request>
         <munit:assert-not-null doc:name="Assert Not Null Payload"/>
-   <munit:assert-on-equals actualValue="#[message.inboundProperties.'http.status']" expectedValue="#[200]"/>
+   <munit:assert-on-equals actualValue="#[message.inboundProperties.'http.status']" expectedValue="#[200]" doc:name="Assert Equals"/>
     </munit:test>
 </mule>
