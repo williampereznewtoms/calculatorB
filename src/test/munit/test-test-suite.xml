@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
     <munit:config mock-connectors="false" mock-inbounds="false" name="munit" doc:name="MUnit configuration"/>
     <spring:beans>
-        <spring:import resource="classpath:test.xml"/>
+        <spring:import resource="classpath:calculatorB.xml"/>
     </spring:beans>
     <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8081" basePath="api" doc:name="HTTP Request Configuration"/>
     <munit:test name="test-test-suite-get:/add:test-configTest" description="Test">
