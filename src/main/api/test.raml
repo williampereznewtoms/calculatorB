@@ -1,0 +1,20 @@
+#%RAML 1.0
+version: v1
+baseUri: https://mocksvc.mulesoft.com/mocks/1871bccf-cc14-4017-af95-af520b6fd2e5
+title: Books API
+
+
+/add:
+  get:
+    queryParameters: 
+     num1: 
+     num2: 
+    responses: 
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "result" : 4
+             
+              }
