@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws"
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:ws="http://www.mulesoft.org/schema/mule/ws"
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd 
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
@@ -19,7 +21,25 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <apikit:console config-ref="test-config" doc:name="APIkit Console"/>
     </flow>
     <flow name="get:/add:test-config">
-        <set-payload value="{&#xA;  &quot;result&quot; : 4&#xA;&#xA;}" doc:name="Set Payload"/>
+          
+<dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+---
+{
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <ws:consumer config-ref="Web_Service_Consumer" operation="Add" doc:name="Web Service Consumer"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+%namespace ns0 http://tempuri.org/
+---
+{
+ resultado:payload.ns0#AddResponse.ns0#AddResult
+}]]></dw:set-payload>
+        </dw:transform-message>
+
     </flow>
     <apikit:mapping-exception-strategy name="test-apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">
