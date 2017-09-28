@@ -42,7 +42,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 %namespace ns0 http://tempuri.org/
 ---
 {
- resultado:payload.ns0#AddResponse.ns0#AddResult
+ resultadoSuma:payload.ns0#AddResponse.ns0#AddResult
 }]]></dw:set-payload>
         </dw:transform-message>
 
